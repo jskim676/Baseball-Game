@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [inputArray, setInputArray] = useState([]);
+
   return (
     <Wrapper>
       <ContentsWrapper>
@@ -9,17 +12,29 @@ function App() {
           <h1>숫자 야구 게임</h1>
         </Header>
         <Main>
-
-
+          <InputValue>
+            <div>
+              {inputArray.map((number, index) => (
+                <div key={index}>{number}</div>
+              ))}
+            </div>
+          </InputValue>
+          <CardList></CardList>
         </Main>
         <Footer>
-          {/* 숫자 */}
           <div>
-            {[0,1,2,3,4,5,6,7,8,9].map(number=>{
-              return <NumerButton onClick={()=>{
-
-              }}>{number}</NumerButton>
-            })}
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
+              <NumerButton
+                key={number}
+                onClick={() => {
+                  if (inputArray.length < 3 && !inputArray.includes(number)) {
+                    setInputArray([...inputArray, number]);
+                    console.log(inputArray);
+                  }
+                }}
+              >{number}
+              </NumerButton>
+            ))}
           </div>
         </Footer>
       </ContentsWrapper>
@@ -73,3 +88,14 @@ const NumerButton = styled.button `
   border:1px solid blue;
   padding:10px;
 `
+const InputValue = styled.div`
+  width: 100%;
+  height: 100px;
+  border:1px solid blue;
+`;
+
+const CardList = styled.div`
+  width: 100%;
+  height: 300px;
+  border:1px solid green;
+`;
