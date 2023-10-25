@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 function App() {
   const [inputArray, setInputArray] = useState([]);
 
+
+
   return (
     <Wrapper>
       <ContentsWrapper>
@@ -12,30 +14,27 @@ function App() {
           <h1>숫자 야구 게임</h1>
         </Header>
         <Main>
-          <InputValue>
-            <div>
-              {inputArray.map((number, index) => (
-                <div key={index}>{number}</div>
-              ))}
-            </div>
-          </InputValue>
+          <InputWrapper>
+            {[0, 1, 2].map(index => (
+              <InputValue key={index}>{inputArray[index]}</InputValue>
+            ))}
+          </InputWrapper>
           <CardList></CardList>
         </Main>
         <Footer>
-          <div>
+          <ButtonWrapper>
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
               <NumerButton
                 key={number}
                 onClick={() => {
                   if (inputArray.length < 3 && !inputArray.includes(number)) {
                     setInputArray([...inputArray, number]);
-                    console.log(inputArray);
                   }
                 }}
               >{number}
               </NumerButton>
             ))}
-          </div>
+          </ButtonWrapper>
         </Footer>
       </ContentsWrapper>
     </Wrapper>
@@ -44,7 +43,7 @@ function App() {
 
 export default App;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div `
   width: 100vw;
   height: 100vh;
 
@@ -53,7 +52,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const ContentsWrapper = styled.div`
+const ContentsWrapper = styled.div `
   width: 500px;
   height: 100%;
   padding: 0 10px;
@@ -83,19 +82,34 @@ const Footer = styled.div `
   border:1px solid green;
 `
 
+
+const InputWrapper = styled.div `
+width: 100%;
+height: 100px;
+display:flex;
+justify-content: center;
+border:1px solid blue;
+`;
+
+const InputValue = styled.div `
+width: 30%;
+height: 50px;
+border:1px solid blue;
+`;
+
+const CardList = styled.div `
+width: 100%;
+height: 300px;
+border:1px solid green;
+`;
+
+const ButtonWrapper = styled.div `
+display:grid;
+grid-template-columns:repeat(5,1fr);
+`;
+
 const NumerButton = styled.button `
   border-radius: 5px;
   border:1px solid blue;
   padding:10px;
 `
-const InputValue = styled.div`
-  width: 100%;
-  height: 100px;
-  border:1px solid blue;
-`;
-
-const CardList = styled.div`
-  width: 100%;
-  height: 300px;
-  border:1px solid green;
-`;
